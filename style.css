@@ -1,17 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Poppins:wght@300;400;500;700");
 
 body {
-  background-color: #2a9d8f;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  padding-top: 50px;
+  margin: 0;
   color: #585F7D;
   font-family: 'Open Sans', sans-serif ;
   text-align: center;
 }
 
 .background {
+  background-color: #2a9d8f;
   position: absolute;
   top: 0;
   left: 0;
-  width: 150vw;
+  width: 100vw;
   height: 100vh;
   z-index: -2;
   overflow: hidden;
@@ -29,17 +35,17 @@ body {
 }
 
 .background .dash:nth-child(4n) {
-  transform: translateX(10%) translateY(-70%) rotate(45deg);
+  transform: translateX(40%) translateY(-60%) rotate(45deg);
   animation-delay: 0s;
 }
 
 .background .dash:nth-child(4n+1) {
-  transform: translateX(10%) translateY(-20%) rotate(45deg);
+  transform: translateX(20%) translateY(-10%) rotate(45deg);
   animation-delay: 2s;
 }
 
 .background .dash:nth-child(4n+2) {
-  transform: translateX(-30%) translateY(10%) rotate(45deg);
+  transform: translateX(-20%) translateY(0%) rotate(45deg);
   animation-delay: 0s;
 }
 
@@ -73,22 +79,27 @@ h2, h3, h4 {
 .box-white {
   background-color: white;
   padding: 32px;
-  margin: 20px auto;
+  margin: 0px auto 20px auto;
   width: 50%;
   box-shadow: 10px 10px 0px #264653;
   transition: .2s;
 }
 
-.box-white:first-child {
-  margin-top: 50px;
-}
-
 .box-white:first-child:has(#profile-picture:hover) {
-  animation: antidisco .2s linear alternate infinite;
+  animation: shake 50ms linear alternate infinite;
 }
 
-.box-white:first-child:has(#profile-picture:hover) ~ .box-white {
-  animation: disco .2s linear alternate infinite;
+.box-white:first-child:has(#profile-picture:hover){
+  animation: shake 50ms linear alternate infinite;
+}
+
+.box-white:first-child:has(#profile-picture:hover) *:not(img) {
+  filter: grayscale(1);
+}
+
+.box-white:first-child:has(#profile-picture:hover) ~ .box-white#box-2 {
+  animation: shake 50ms 50ms linear alternate infinite;
+  filter: grayscale(1);
 }
 
 .box-white:first-child:has(#profile-picture:hover) ~ .background#bg-1 {
@@ -97,6 +108,8 @@ h2, h3, h4 {
 
 .box-white:first-child:has(#profile-picture:hover) ~ .background#bg-2 {
   display: block;
+  width: 110vw;
+  filter: saturate(20);
 }
 
 .box-white:first-child:has(#profile-picture:hover) ~ .background#bg-2 .dash {
@@ -104,12 +117,26 @@ h2, h3, h4 {
 }
 
 .box-white:first-child:has(#profile-picture:hover) ~ .background {
-  animation: antidisco .2s linear alternate infinite;
+  animation: shake 50ms linear alternate infinite;
+  background-color: black;
 }
 
 .box-white:hover {
   transform: translate(5px, 5px);
   box-shadow: none;
+}
+
+#profile-picture {
+  width: 200px;
+  box-shadow: 6px 6px 0px #e76f51;
+  transition: 100ms;
+}
+
+#profile-picture:hover {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+  animation: shake 50ms linear alternate-reverse infinite;
+  filter: saturate(20);
 }
 
 a {
@@ -144,6 +171,7 @@ blockquote {
   position: relative;
   font-style: italic;
   padding: 0 3em;
+  margin: 20px auto;
 }
 
 blockquote:before {
@@ -166,18 +194,6 @@ blockquote:after {
   content: '\201D';
 }
 
-#profile-picture {
-  width: 200px;
-  box-shadow: 6px 6px 0px #e76f51;
-  transition: 100ms;
-}
-
-#profile-picture:hover {
-  transform: translate(3px, 3px);
-  box-shadow: none;
-  animation: disco .2s linear alternate infinite;
-}
-
 ul {
   list-style: none;
   padding: 0px;
@@ -188,33 +204,26 @@ ul li {
   margin: 0px 4px;
 }
 
+@media (max-width: 840px) {
+ .box-white {
+    width: 80%;
+    padding: 16px;
+  }
+}
+
 @media (max-width: 540px) {
   #profile-picture {
     width: 50%;
   }
 }
 
-@keyframes disco {
+@keyframes shake {
   0% {
-    filter: hue-rotate(0deg);
-    transform: skew(-2deg) scale(1) rotate(-10deg);
+    transform: translateX(-20px);
   }
 
   100% {
-    filter: hue-rotate(360deg);
-    transform: skew(2deg) scale(1.1) rotate(10deg);
-  }
-}
-
-@keyframes antidisco {
-  0% {
-    filter: hue-rotate(360deg);
-    transform: skew(2deg) scale(1.1) rotate(10deg);
-  }
-
-  100% {
-    filter: hue-rotate(0deg);
-    transform: skew(-2deg) scale(1) rotate(-10deg);
+    transform: translateX(0px);
   }
 }
 
