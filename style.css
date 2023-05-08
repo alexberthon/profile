@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Poppins:wght@300;400;500;700");
+
+body {
+  color: #585F7D;
+  font-family: 'Open Sans', sans-serif ;
+  text-align: center;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background-color: #2a9d8f;
+}
+
+.dash {
+  stroke-dasharray: 700;
+  z-index: -1;
+  stroke-width: 20px;
+  animation: wiggle 15s linear infinite;
+}
+
+.dash:nth-child(4n) {
+  transform: translateX(500px) translateY(-500px) rotate(45deg);
+  animation-delay: 0s;
+}
+
+.dash:nth-child(4n+1) {
+  transform: translateX(500px) translateY(0px) rotate(45deg);
+  animation-delay: 2s;
+}
+
+.dash:nth-child(4n+2) {
+  transform: translateY(500px) rotate(45deg);
+  animation-delay: 0s;
+}
+
+.dash:nth-child(4n+3) {
+  transform: translateY(1000px) rotate(45deg);
+  animation-delay: 2s;
+}
+
+@keyframes wiggle {
+  0% {
+    stroke-dashoffset: 10;
+    stroke: #e9c46a;
+  }
+
+  100% {
+    stroke-dashoffset: 9800;
+    stroke: #e76f51;
+  }
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  color: #585F7D;
+  text-shadow: 2px 2px 0px #e76f51;
+  font-size: 3em;
+  margin: 20px auto;
+}
+
+h2, h3, h4 {
+  color: #e76f51;
+}
+
+.box-white {
+  background-color: white;
+  padding: 32px;
+  margin: 20px auto;
+  width: 50%;
+  box-shadow: 10px 10px 0px #264653;
+  transition: .2s;
+}
+
+.box-white:first-child {
+  margin-top: 50px;
+}
+
+.box-white:hover {
+  transform: translate(5px, 5px);
+  box-shadow: none;
+}
+
+a {
+  color: #2a9d8f;
+  position: relative;
+  text-decoration: none;
+  transition: .3s;
+}
+
+a::before {
+  content: "";
+  position: absolute;
+  left: 0%;
+  bottom: -25%;
+  width: 0%;
+  height: 6px;
+  transform: skew(-12deg);
+  background: #e76f51;
+  z-index: 2;
+  transition: .3s;
+}
+
+a:hover::before {
+  width: 100%;
+}
+
+a:hover {
+  color: black;
+}
+
+#profile-picture {
+  width: 200px;
+  box-shadow: 6px 6px 0px #e76f51;
+  transition: 100ms;
+}
+
+#profile-picture:hover {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+  animation: disco .2s linear alternate infinite;
+}
+
+@keyframes disco {
+  0% {
+    filter: contrast(200%) hue-rotate(0deg);
+    transform: skew(-2deg) scale(1) rotate(-10deg);
+  }
+
+  100% {
+    filter: contrast(200%) hue-rotate(360deg);
+    transform: skew(2deg) scale(1.1) rotate(10deg);
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+ul li {
+  display: inline-block;
+  margin: 0px 4px;
+}
+
+@media (max-width: 540px) {
+  /* For a screen < 540px, this CSS will be read */
+  #profile-picture {
+    width: 50%;
+  }
+}
