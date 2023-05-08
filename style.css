@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Poppins:wght@300;400;500;700");
 
 body {
+  background-color: #2a9d8f;
   color: #585F7D;
   font-family: 'Open Sans', sans-serif ;
   text-align: center;
@@ -10,50 +11,43 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 150vw;
   height: 100vh;
   z-index: -2;
-  background-color: #2a9d8f;
+  overflow: hidden;
+}
+
+.background:last-child {
+  display: none;
 }
 
 .dash {
   stroke-dasharray: 700;
   z-index: -1;
   stroke-width: 20px;
-  animation: wiggle 15s linear infinite;
+  animation: wiggle 30s linear infinite;
 }
 
-.dash:nth-child(4n) {
-  transform: translateX(500px) translateY(-500px) rotate(45deg);
+.background .dash:nth-child(4n) {
+  transform: translateX(10%) translateY(-70%) rotate(45deg);
   animation-delay: 0s;
 }
 
-.dash:nth-child(4n+1) {
-  transform: translateX(500px) translateY(0px) rotate(45deg);
+.background .dash:nth-child(4n+1) {
+  transform: translateX(10%) translateY(-20%) rotate(45deg);
   animation-delay: 2s;
 }
 
-.dash:nth-child(4n+2) {
-  transform: translateY(500px) rotate(45deg);
+.background .dash:nth-child(4n+2) {
+  transform: translateX(-30%) translateY(10%) rotate(45deg);
   animation-delay: 0s;
 }
 
-.dash:nth-child(4n+3) {
-  transform: translateY(1000px) rotate(45deg);
+.background .dash:nth-child(4n+3) {
+  transform: translateX(-40%) translateY(50%) rotate(45deg);
   animation-delay: 2s;
 }
 
-@keyframes wiggle {
-  0% {
-    stroke-dashoffset: 10;
-    stroke: #e9c46a;
-  }
-
-  100% {
-    stroke-dashoffset: 9800;
-    stroke: #e76f51;
-  }
-}
 
 h1, h2, h3, h4 {
   font-family: 'Poppins', sans-serif;
@@ -70,6 +64,12 @@ h2, h3, h4 {
   color: #e76f51;
 }
 
+.text-small {
+  font-size: 0.5em;
+  font-weight: bold;
+  color: #e76f51;
+}
+
 .box-white {
   background-color: white;
   padding: 32px;
@@ -81,6 +81,30 @@ h2, h3, h4 {
 
 .box-white:first-child {
   margin-top: 50px;
+}
+
+.box-white:first-child:has(#profile-picture:hover) {
+  animation: antidisco .2s linear alternate infinite;
+}
+
+.box-white:first-child:has(#profile-picture:hover) ~ .box-white {
+  animation: disco .2s linear alternate infinite;
+}
+
+.box-white:first-child:has(#profile-picture:hover) ~ .background#bg-1 {
+  display: none;
+}
+
+.box-white:first-child:has(#profile-picture:hover) ~ .background#bg-2 {
+  display: block;
+}
+
+.box-white:first-child:has(#profile-picture:hover) ~ .background#bg-2 .dash {
+  animation: wiggle 3s linear infinite;
+}
+
+.box-white:first-child:has(#profile-picture:hover) ~ .background {
+  animation: antidisco .2s linear alternate infinite;
 }
 
 .box-white:hover {
@@ -116,6 +140,32 @@ a:hover {
   color: black;
 }
 
+blockquote {
+  position: relative;
+  font-style: italic;
+  padding: 0 3em;
+}
+
+blockquote:before {
+  font-family: Georgia, serif;
+  position: absolute;
+  font-size: 6em;
+  line-height: 1;
+  top: -5px;
+  left: 0;
+  content: '\201C';
+}
+
+blockquote:after {
+  font-family: Georgia, serif;
+  position: absolute;
+  font-size: 6em;
+  line-height: 1;
+  right: 15px;
+  bottom: -0.7em;
+  content: '\201D';
+}
+
 #profile-picture {
   width: 200px;
   box-shadow: 6px 6px 0px #e76f51;
@@ -126,18 +176,6 @@ a:hover {
   transform: translate(3px, 3px);
   box-shadow: none;
   animation: disco .2s linear alternate infinite;
-}
-
-@keyframes disco {
-  0% {
-    filter: contrast(200%) hue-rotate(0deg);
-    transform: skew(-2deg) scale(1) rotate(-10deg);
-  }
-
-  100% {
-    filter: contrast(200%) hue-rotate(360deg);
-    transform: skew(2deg) scale(1.1) rotate(10deg);
-  }
 }
 
 ul {
@@ -151,8 +189,43 @@ ul li {
 }
 
 @media (max-width: 540px) {
-  /* For a screen < 540px, this CSS will be read */
   #profile-picture {
     width: 50%;
+  }
+}
+
+@keyframes disco {
+  0% {
+    filter: hue-rotate(0deg);
+    transform: skew(-2deg) scale(1) rotate(-10deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+    transform: skew(2deg) scale(1.1) rotate(10deg);
+  }
+}
+
+@keyframes antidisco {
+  0% {
+    filter: hue-rotate(360deg);
+    transform: skew(2deg) scale(1.1) rotate(10deg);
+  }
+
+  100% {
+    filter: hue-rotate(0deg);
+    transform: skew(-2deg) scale(1) rotate(-10deg);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    stroke-dashoffset: 10;
+    stroke: #e9c46a;
+  }
+
+  100% {
+    stroke-dashoffset: 9800;
+    stroke: #e76f51;
   }
 }
